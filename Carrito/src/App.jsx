@@ -21,7 +21,24 @@ function App() {
       setProductosCarrito([...productosCarrito, { ...producto, cantidad: 1 }]);
     }
   };
-
+  const quitarCarrito = (producto) => {
+    const productoExistente = productosCarrito.find(
+      (prodPrev) => prodPrev.id === producto.id
+    );
+    if (productoExistente.cantidad === 1) {
+      const actualizado = productosCarrito.filter(
+        (prodPrev) => prodPrev.id !== producto.id
+      );
+      setProductosCarrito(actualizado);
+    } else {
+      const actualizado = productosCarrito.map((prodPrev) =>
+        prodPrev.id === producto.id
+          ? { ...prodPrev, cantidad: prodPrev.cantidad - 1 }
+          : prodPrev
+      );
+      setProductosCarrito(actualizado);
+    }
+  };
   return (
     <>
       <div className="container">
@@ -30,7 +47,10 @@ function App() {
             <Productos productos={groceries} agregarCarrito={agregarCarrito} />
           </div>
           <div className="col-6">
-            <Carrito productosCarrito={productosCarrito} />
+            <Carrito
+              productosCarrito={productosCarrito}
+              quitarCarrito={quitarCarrito}
+            />
           </div>
         </div>
       </div>

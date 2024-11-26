@@ -4,7 +4,7 @@ function Productos({ productos, agregarCarrito }) {
       <h2>Productos</h2>
       {productos.map((producto) => (
         <p key={producto.id} onClick={() => agregarCarrito(producto)}>
-          {producto.name} - ${producto.unitPrice}
+          {producto.name} (${producto.unitPrice} c/u)
         </p>
       ))}
     </div>
