@@ -39,9 +39,15 @@ function App() {
       setProductosCarrito(actualizado);
     }
   };
+  const calcularTotal = () => {
+    const total = productosCarrito.reduce((suma, producto) => {
+      return suma + producto.unitPrice * producto.cantidad;
+    }, 0);
+    return total.toFixed(2);
+  };
   return (
     <>
-      <div className="container">
+      <div className="container contenedor">
         <div className="row">
           <div className="col-6">
             <Productos productos={groceries} agregarCarrito={agregarCarrito} />
@@ -51,6 +57,7 @@ function App() {
               productosCarrito={productosCarrito}
               quitarCarrito={quitarCarrito}
             />
+            <h2 className="total">Total: ${calcularTotal()}</h2>
           </div>
         </div>
       </div>
